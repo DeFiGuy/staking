@@ -73,7 +73,8 @@ export default class SectionMain extends Component {
       reinvestRewards: this.reinvestRewards.bind(this),
       unstakeAll: this.unstakeAll.bind(this),
       approveContract: this.approveContract.bind(this),
-      claimUserAirdrop: this.claimUserAirdrop.bind(this)
+      claimUserAirdrop: this.claimUserAirdrop.bind(this),
+      registerForAirdrop: this.registerForAirdrop.bind(this),
     };
 
   }
@@ -260,8 +261,7 @@ export default class SectionMain extends Component {
   // Get user airdrop amount
   async getUserAirdrop(){
     if (this.state.web3 !== null && this.state.airdropContract !== null && this.state.account !== ''){
-      const airdropRound = await this.state.airdropContract.methods.airdrop_round(SALE_TOKEN_ADDRESS).call({ from: this.state.account[0] });
-      const amount = await this.state.airdropContract.methods.claimAirdropAllView(SALE_TOKEN_ADDRESS, airdropRound).call({ from: this.state.account[0] });
+      const amount = await this.state.airdropContract.methods.claimRegisteredAirdropViewer(SALE_TOKEN_ADDRESS).call({ from: this.state.account[0] });
       this.setState({userAirdropAmt: Math.ceil(((amount/1000000000000000000)*100)/100)});
     }
     else{
@@ -283,9 +283,8 @@ export default class SectionMain extends Component {
   // Claim airdrop
   async claimUserAirdrop(){
     Toast.loading("Claiming Airdrop!");
-    const airdropRound = await this.state.airdropContract.methods.airdrop_round(SALE_TOKEN_ADDRESS).call({ from: this.state.account[0] });
     if (this.state.web3 !== null && this.state.airdropContract !== null && this.state.account !== ''){
-      this.state.airdropContract.methods.claimAirdropAll(SALE_TOKEN_ADDRESS, airdropRound).send({ from: this.state.account[0] })
+      this.state.airdropContract.methods.claimRegisteredAirdrop(SALE_TOKEN_ADDRESS).send({ from: this.state.account[0] })
       .on('transactionHash', (receipt) => {
         this.setState({ showTransaction: true });
         this.setState({ transactionHash: receipt });
@@ -300,6 +299,29 @@ export default class SectionMain extends Component {
         this.setState({userAirdropAmt: 0});
         this.reloadData();
         Toast.success('Success', 1500)
+      });
+    }
+  }
+
+  //Register for airdrops
+  async registerForAirdrop(){
+    Toast.loading("Registering your wallet!");
+    if (this.state.web3 !== null && this.state.airdropContract !== null && this.state.account !== ''){
+      this.state.airdropContract.methods.RegisterForAirdrop(SALE_TOKEN_ADDRESS).send({ from: this.state.account[0] })
+      .on('transactionHash', (receipt) => {
+        this.setState({ showTransaction: true });
+        this.setState({ transactionHash: receipt });
+      })
+      .on('error', (error) => {
+        this.setState({ transactionError: error.message });
+        this.setState({ showError: true });
+        Toast.fail('Failed', 1500)
+      })
+      .once('receipt', (receipt) => {
+        console.log(receipt);
+        this.setState({userAirdropAmt: 0});
+        this.reloadData();
+        Toast.success('You have successfully registered your staked amount!', 1500)
       });
     }
   }

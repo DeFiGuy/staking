@@ -4,7 +4,7 @@
 
 export const STAKE_ADDRESS = "0x71659515a307CaFD365fb6f74C5c7eE302Fa5799";
 export const SALE_TOKEN_ADDRESS = "0x7f310bb4a4460faf83aefc470e95f3f219c6c75b";
-export const AIRDROP_ADDRESS = "0x33158388c678d121Cf64F096ca2927c257972404";
+export const AIRDROP_ADDRESS = "0xcc6C67E800Ec3e082F0D414C9f5692C3f9D20e9b";
 
 export const DXSTAKEABI = 
 [
@@ -1280,6 +1280,88 @@ export const AIRDROPABI = [
 		"type": "event"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "claimTokenAdr",
+				"type": "address"
+			}
+		],
+		"name": "claimRegisteredAirdrop",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "tokenAdr",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_round",
+				"type": "uint256"
+			}
+		],
+		"name": "disable_token_drop",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "tokenAdr",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_round",
+				"type": "uint256"
+			}
+		],
+		"name": "enable_token_drop",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "tokenAdr",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_dropAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_earlyDropAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_eligibleEarlyTime",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_deadline",
+				"type": "uint256"
+			}
+		],
+		"name": "initiate_token_drop",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -1302,73 +1384,49 @@ export const AIRDROPABI = [
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "claimTokenAdr",
+				"name": "tokenAddr",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "wallet",
 				"type": "address"
 			},
 			{
 				"internalType": "uint256",
-				"name": "airdropRound",
+				"name": "_amount",
 				"type": "uint256"
 			}
 		],
-		"name": "CLAIMAIRDROPVIEW",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
+		"name": "refundAirdropTokens",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "",
+				"name": "claimTokenAdr",
 				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
 			}
 		],
-		"name": "STAKE_total_for_token",
-		"outputs": [
+		"name": "RegisterForAirdrop",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "initiatedTime",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bool",
-				"name": "initiated",
-				"type": "bool"
-			},
-			{
-				"internalType": "uint256",
-				"name": "dropAmount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "totalSTAKED",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "totalSTAKEDCalc",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "tokenAvailable",
-				"type": "uint256"
+				"internalType": "address",
+				"name": "_newStakeAddr",
+				"type": "address"
 			}
 		],
-		"stateMutability": "view",
+		"name": "updateStakingAddress",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -1404,6 +1462,19 @@ export const AIRDROPABI = [
 				"internalType": "address",
 				"name": "",
 				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "checkBlockTimeStamp",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -1479,32 +1550,9 @@ export const AIRDROPABI = [
 				"internalType": "address",
 				"name": "claimTokenAdr",
 				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "airdropRound",
-				"type": "uint256"
 			}
 		],
-		"name": "claimAirdropAll",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "claimTokenAdr",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "airdropRound",
-				"type": "uint256"
-			}
-		],
-		"name": "claimAirdropAllView",
+		"name": "claimRegisteredAirdropViewer",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1513,24 +1561,6 @@ export const AIRDROPABI = [
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "tokenAdr",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_round",
-				"type": "uint256"
-			}
-		],
-		"name": "disable_token_drop",
-		"outputs": [],
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -1544,42 +1574,6 @@ export const AIRDROPABI = [
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "tokenAdr",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_round",
-				"type": "uint256"
-			}
-		],
-		"name": "enable_token_drop",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "tokenAdr",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_dropAmount",
-				"type": "uint256"
-			}
-		],
-		"name": "initiate_token_drop",
-		"outputs": [],
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -1612,23 +1606,177 @@ export const AIRDROPABI = [
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "tokenAddr",
+				"name": "",
 				"type": "address"
+			}
+		],
+		"name": "Registration",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "RegistrationTime",
+				"type": "uint256"
 			},
 			{
+				"internalType": "bool",
+				"name": "Registered",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "userStaked",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "round",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "earlyStaker",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "totalSTAKED",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "reigsteredEarlyTokenInRound",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "reigsteredEarlyTokenTotal",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "reigsteredTokenInRound",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "reigsteredTokenTotal",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
-				"name": "wallet",
+				"name": "",
 				"type": "address"
 			},
 			{
 				"internalType": "uint256",
-				"name": "_amount",
+				"name": "",
 				"type": "uint256"
 			}
 		],
-		"name": "refundAirdropTokens",
-		"outputs": [],
-		"stateMutability": "nonpayable",
+		"name": "STAKE_total_for_token",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "initiatedTime",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "deadline",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "eligibleTime",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "initiated",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "dropAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "earlyDropAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "totalSTAKED",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "totalSTAKEDCalc",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenAvailable",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "registrationEnabled",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -1664,19 +1812,6 @@ export const AIRDROPABI = [
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "totalStaked",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -1693,19 +1828,6 @@ export const AIRDROPABI = [
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_newStakeAddr",
-				"type": "address"
-			}
-		],
-		"name": "updateStakingAddress",
-		"outputs": [],
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{

@@ -30,7 +30,11 @@ export default class DxDrop extends Component {
             <form className="input-round">
                 <div className="row">
                   <div className="col-lg-12 col-md-12 col-sm-12">
-                      <div><span style={{ color: '#8A61F8' }}>Click the button below to claim your latest SALE airdrop.</span><br/><button disabled={this.props.userAirdropAmt <= 0} className="btn btn-primary" type="button" onClick={this.props.claimUserAirdrop} style={{fontSize: '80%', width:"150px"}}>
+                      <div><span style={{ color: '#8A61F8', fontSize: '80%' }}>Click the button below to register for all future airdrops.<br/>If at anytime you have staked more SALE or unstaked SALE then you need to register again!</span><br/><button disabled={false} className="btn btn-secondary" type="button" onClick={this.props.registerForAirdrop} style={{fontSize: '80%', width:"150px"}}>
+                        Register
+                      </button></div>
+                      <br/>
+                      <div><span style={{ color: '#8A61F8', fontSize: '80%' }}>The button below should allow you to claim your SALE airdrop if you have any available!</span><br/><button disabled={this.props.userAirdropAmt <= 0} className="btn btn-primary" type="button" onClick={this.props.claimUserAirdrop} style={{fontSize: '80%', width:"150px"}}>
                         Claim
                       </button></div>
                   </div>
