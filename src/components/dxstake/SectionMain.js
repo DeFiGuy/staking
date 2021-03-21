@@ -47,6 +47,8 @@ export default class SectionMain extends Component {
       airdropContract: null,
       userAirdropAmt: 0,
       totalAirdropAmt: 0,
+      registrationInfo: 0,
+      earlyStaker: false,
       stakeAmount: 0,
       unstakeAmount: 0,
       web3: null,
@@ -164,6 +166,7 @@ export default class SectionMain extends Component {
     this.getSalePrice();
     this.getUserAirdrop();
     this.getLifeTimeAirdrop();
+    this.getEarlyStakerStatus();
   }
 
   // Get minimum staking amount
@@ -274,6 +277,17 @@ export default class SectionMain extends Component {
     if (this.state.web3 !== null && this.state.airdropContract !== null && this.state.account !== ''){
       const amount = await this.state.airdropContract.methods.totalTokensAirdroped(SALE_TOKEN_ADDRESS).call({ from: this.state.account[0] });
       this.setState({totalAirdropAmt: Math.ceil(((amount/1000000000000000000)*100)/100)});
+    }
+    else{
+      console.log('Web3 connection issue');
+    }
+  }
+
+  // Find out if user is an early staker or not
+  async getEarlyStakerStatus(){
+    if (this.state.web3 !== null && this.state.airdropContract !== null && this.state.account !== ''){
+      const registrationData = await this.state.airdropContract.methods.Registration(this.state.account[0]).call({ from: this.state.account[0] });
+      this.setState({earlyStaker: registrationData['earlyStaker']});
     }
     else{
       console.log('Web3 connection issue');
