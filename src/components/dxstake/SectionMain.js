@@ -50,6 +50,8 @@ export default class SectionMain extends Component {
       registrationInfo: 0,
       registrationData: 0,
       earlyStaker: false,
+      userRegistered: false,
+      registeredStakedAmount: 0,
       stakeAmount: 0,
       unstakeAmount: 0,
       web3: null,
@@ -290,6 +292,8 @@ export default class SectionMain extends Component {
     if (this.state.web3 !== null && this.state.airdropContract !== null && this.state.account !== ''){
       const registrationData = await this.state.airdropContract.methods.Registration(this.state.account[0]).call({ from: this.state.account[0] });
       this.setState({earlyStaker: registrationData['earlyStaker']});
+      this.setState({registeredStakedAmount: registrationData['userStaked']});
+      this.setState({userRegistered: registrationData['Registered']});
     }
     else{
       console.log('Web3 connection issue');
