@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Countdown from 'react-countdown';
 
 export default class DxDrop extends Component {
 
@@ -30,13 +30,23 @@ export default class DxDrop extends Component {
             <form className="input-round">
                 <div className="row">
                   <div className="col-lg-12 col-md-12 col-sm-12">
+                      {Date.now() < this.props.registrationData['deadline'] * 1000 
+                      ?
                       <div><span style={{ color: '#8A61F8', fontSize: '80%' }}>Click the button below to register for all future airdrops.</span>
-                      <span style={{ color: 'black', fontSize: '80%' }}><br/>If at anytime you have staked more SALE or unstaked SALE then you need to register again!</span><br/>
+                      <br/>
                       <button disabled={false} className="btn btn-secondary" type="button" onClick={this.props.registerForAirdrop} style={{fontSize: '80%', width:"150px"}}>
                         Register
-                      </button></div>
+                      </button>
+                      <br/><br/>
+                      Registration is open until:
                       <br/>
-                      <div><span style={{ color: '#8A61F8', fontSize: '80%' }}>The button below should allow you to claim your SALE airdrop if you have any available!</span><br/>
+                      <Countdown date={this.props.registrationData['deadline']*1000} />
+                      <br/>
+                      </div>
+                      :
+                      <span>Registration will open on next airdrop and will be announced in our social media channels.<br/></span>
+                      }
+                      <br/><div><span style={{ color: '#8A61F8', fontSize: '80%' }}>The button below should allow you to claim your SALE airdrop if you have any available!</span><br/>
                       <button disabled={this.props.userAirdropAmt <= 0} className="btn btn-primary" type="button" onClick={this.props.claimUserAirdrop} style={{fontSize: '80%', width:"150px"}}>
                         Claim
                       </button></div>
@@ -46,14 +56,14 @@ export default class DxDrop extends Component {
             {this.props.earlyStaker
             ?
             <div>
-              <br/><span style={{ color: 'black'}}>✅ Early Staker<br/>Congratulations you are an early staker!<br/>You will receive more airdrop allocation then others.<br/>Thank you for supporting DxSale</span>
+              <br/><span style={{ color: 'black'}}>✅ Early Staker<br/>Congratulations you are an early staker!<br/>You will receive more airdrop allocation than others.<br/>Thank you for supporting DxSale</span>
             </div>
             :
             null
             }
           </div>
         </div>
-        <div class="row justify-content-center">
+        <div className="row justify-content-center">
         <span style={{ color: 'black', fontSize: '80%', alignContent: 'left' }}>
             <br/><br/><strong>Registration Instructions:</strong><br/>
             - Registration only opens for a limited period when a new airdrop round goes live.<br/> 
@@ -61,6 +71,7 @@ export default class DxDrop extends Component {
             - New users that have never registered before must register at this time to be eligible for all future airdrops.<br/>
             - If you have staked more SALE you must register to be eligible for airdrops on the additional SALE staked.<br/>
             - If you have unstaked SALE but still have some tokens staked you must register to remain eligible for airdrops.<br/>
+            - If you missed this registration round not to worry you will have a chance to register again before the next airdrop goes live!<br/>
         </span>
         </div>
       </div>

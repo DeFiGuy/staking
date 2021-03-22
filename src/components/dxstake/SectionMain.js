@@ -48,6 +48,7 @@ export default class SectionMain extends Component {
       userAirdropAmt: 0,
       totalAirdropAmt: 0,
       registrationInfo: 0,
+      registrationData: 0,
       earlyStaker: false,
       stakeAmount: 0,
       unstakeAmount: 0,
@@ -96,7 +97,6 @@ export default class SectionMain extends Component {
         this.setState({ approved: false });
         this.reloadData();
       })
-      console.log("I'm here")
     }
     // Legacy dapp browsers...
     else if (window.web3) {
@@ -167,6 +167,7 @@ export default class SectionMain extends Component {
     this.getUserAirdrop();
     this.getLifeTimeAirdrop();
     this.getEarlyStakerStatus();
+    this.getRegistrationData();
   }
 
   // Get minimum staking amount
@@ -263,12 +264,13 @@ export default class SectionMain extends Component {
 
   // Get user airdrop amount
   async getUserAirdrop(){
-    if (this.state.web3 !== null && this.state.airdropContract !== null && this.state.account !== ''){
+    try{
       const amount = await this.state.airdropContract.methods.claimRegisteredAirdropViewer(SALE_TOKEN_ADDRESS).call({ from: this.state.account[0] });
       this.setState({userAirdropAmt: Math.ceil(((amount/1000000000000000000)*100)/100)});
     }
-    else{
-      console.log('Web3 connection issue');
+    catch (err){
+      console.log(err);
+      this.setState({userAirdropAmt: 0});
     }
   }
 
@@ -288,6 +290,19 @@ export default class SectionMain extends Component {
     if (this.state.web3 !== null && this.state.airdropContract !== null && this.state.account !== ''){
       const registrationData = await this.state.airdropContract.methods.Registration(this.state.account[0]).call({ from: this.state.account[0] });
       this.setState({earlyStaker: registrationData['earlyStaker']});
+    }
+    else{
+      console.log('Web3 connection issue');
+    }
+  }
+
+  async getRegistrationData(){
+    if (this.state.web3 !== null && this.state.airdropContract !== null && this.state.account !== ''){
+      const airdropRound = await this.state.airdropContract.methods.airdrop_round(SALE_TOKEN_ADDRESS).call();
+      const registrationDataFetch = await this.state.airdropContract.methods.STAKE_total_for_token(SALE_TOKEN_ADDRESS, airdropRound).call();
+      this.setState({registrationData: registrationDataFetch})
+      console.log("Registration deadline is " + registrationDataFetch['deadline']);
+      console.log("Date.now is " + Date.now())
     }
     else{
       console.log('Web3 connection issue');
