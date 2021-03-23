@@ -297,8 +297,8 @@ export default class SectionMain extends Component {
       this.setState({registeredStakedAmount: registrationData['userStaked']*100/100});
       this.setState({userRegistered: registrationData['Registered']});
 
-      console.log(registrationData['userStaked']*100/100);
-      console.log(this.state.yourSaleStakedx);
+      console.log(Math.floor((registrationData['userStaked']*100/100) / 10**18));
+      console.log(Math.floor(this.state.yourSaleStakedx / 10**18));
 
     }
     else{
