@@ -21,7 +21,16 @@ export default class DxDrop extends Component {
             <div className="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-xs-12 vertical-center" style={{ backgroundColor: "#f0eaff" }}>
                 <h6 style={{ color: "#000", fontSize: "80%", marginTop: "5px" }}>
                 Your Available SALE Airdrop:
-                <br/><span style={{color: "#1e30ed"}}>{this.props.userAirdropAmt} ({(this.props.userAirdropAmt*this.props.salePrice).toFixed(2)} USD)</span>
+                {Date.now() < this.props.registrationData['deadline']*1000
+                ?
+                  <div>
+                    <span>0 (0 USD)</span>
+                  </div>
+                :
+                  <div>
+                    <span style={{color: "#1e30ed"}}>{this.props.userAirdropAmt} ({(this.props.userAirdropAmt*this.props.salePrice).toFixed(2)} USD)</span>
+                  </div>
+                }
                 </h6>
             </div>
           </div>
@@ -36,7 +45,7 @@ export default class DxDrop extends Component {
                         {this.props.userRegistered 
                         ?
                         <div>
-                          {this.props.registeredStakeAmount != this.props.yourSaleStaked
+                          {this.props.registeredStakeAmount != this.props.yourSaleStakedx
                           ?
                           <div>
                             <span style={{ color: '#8A61F8', fontSize: '80%' }}>You registered earlier but your staked amount doesn't match your registered amount. Please click the button below to re-regsiter!</span>

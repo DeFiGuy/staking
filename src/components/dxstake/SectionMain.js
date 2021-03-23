@@ -37,6 +37,7 @@ export default class SectionMain extends Component {
       minStakeAmount: 0,
       totalSaleStaked: 0,
       yourSaleStaked: 0,
+      yourSaleStakedx: 0,
       totalBurned: 0,
       userRewards: 0,
       approvalAmount: 0,
@@ -235,6 +236,7 @@ export default class SectionMain extends Component {
       }
       else{
         this.setState({yourSaleStaked: Math.floor(amount*100)/100});
+        this.setState({yourSaleStakedx: amount});
       }
     }
     else{
