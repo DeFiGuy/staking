@@ -236,7 +236,7 @@ export default class SectionMain extends Component {
       }
       else{
         this.setState({yourSaleStaked: Math.floor(amount*100)/100});
-        this.setState({yourSaleStakedx: amount});
+        this.setState({yourSaleStakedx: amount * 10**18});
       }
     }
     else{
@@ -294,8 +294,12 @@ export default class SectionMain extends Component {
     if (this.state.web3 !== null && this.state.airdropContract !== null && this.state.account !== ''){
       const registrationData = await this.state.airdropContract.methods.Registration(this.state.account[0]).call({ from: this.state.account[0] });
       this.setState({earlyStaker: registrationData['earlyStaker']});
-      this.setState({registeredStakedAmount: registrationData['userStaked']});
+      this.setState({registeredStakedAmount: registrationData['userStaked']*1});
       this.setState({userRegistered: registrationData['Registered']});
+
+      console.log(registrationData['userStaked']);
+      console.log(this.state.yourSaleStakedx);
+
     }
     else{
       console.log('Web3 connection issue');
