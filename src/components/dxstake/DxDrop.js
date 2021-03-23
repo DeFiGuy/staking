@@ -45,7 +45,7 @@ export default class DxDrop extends Component {
                         {this.props.userRegistered 
                         ?
                         <div>
-                          {(this.props.registeredStakedAmount / 10**18).toFixed(2) != (this.props.yourSaleStakedx / 10**18).toFixed(2)
+                          {(this.props.registeredStakedAmount / 10**18).toFixed(0) != (this.props.yourSaleStakedx / 10**18).toFixed(0)
                           ?
                           <div>
                             <span style={{ color: '#8A61F8', fontSize: '80%' }}>You registered earlier but your staked amount doesn't match your registered amount.<br/>Please click the button below to re-regsiter!</span>
