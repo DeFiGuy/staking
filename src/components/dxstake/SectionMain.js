@@ -294,10 +294,10 @@ export default class SectionMain extends Component {
     if (this.state.web3 !== null && this.state.airdropContract !== null && this.state.account !== ''){
       const registrationData = await this.state.airdropContract.methods.Registration(this.state.account[0]).call({ from: this.state.account[0] });
       this.setState({earlyStaker: registrationData['earlyStaker']});
-      this.setState({registeredStakedAmount: registrationData['userStaked']*1});
+      this.setState({registeredStakedAmount: registrationData['userStaked']*100/100});
       this.setState({userRegistered: registrationData['Registered']});
 
-      console.log(registrationData['userStaked']);
+      console.log(registrationData['userStaked']*100/100);
       console.log(this.state.yourSaleStakedx);
 
     }
