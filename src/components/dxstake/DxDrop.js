@@ -48,7 +48,7 @@ export default class DxDrop extends Component {
                           {this.props.registeredStakedAmount != this.props.yourSaleStakedx
                           ?
                           <div>
-                            <span style={{ color: '#8A61F8', fontSize: '80%' }}>You registered earlier but your staked amount doesn't match your registered amount. Please click the button below to re-regsiter!</span>
+                            <span style={{ color: '#8A61F8', fontSize: '80%' }}>You registered earlier but your staked amount doesn't match your registered amount.<br/>Please click the button below to re-regsiter!</span>
                             <br/>
                             <button disabled={false} className="btn btn-secondary" type="button" onClick={this.props.registerForAirdrop} style={{fontSize: '80%', width:"150px"}}>
                               Register
@@ -61,7 +61,7 @@ export default class DxDrop extends Component {
                           </div>
                           :
                           <div>
-                            <span style={{ color: '#8A61F8', fontSize: '80%' }}>You are already registered! Claiming your airdrop will be available once the registration deadline is finished!</span>
+                            <span style={{ color: '#8A61F8', fontSize: '80%' }}>You are already registered!<br/>Claiming your airdrop will be available once the registration deadline is finished!</span>
                             <br/><br/>
                             Registration ends in:
                             <br/>
