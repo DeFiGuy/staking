@@ -7,8 +7,25 @@ export default class DxDrop extends Component {
     return (
       <div className="tab-pane fade active show" id="dxstake">
         <div className="container">
-
-          <div className="row justify-content-center">
+            <div className="row justify-content-center">
+              <div className="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-xs-12 vertical-center" style={{ backgroundColor: "#f0eaff" }}>
+                  <h6 style={{ color: "#000", fontSize: "80%", marginTop: "5px" }}>
+                  Your SALE Wallet Balance:
+                  <br/><span style={{color: "#1e30ed"}}>{this.props.saleBalance} ({(this.props.saleBalance*this.props.salePrice).toFixed(2)} USD)</span>
+                  </h6>
+              </div>
+              <div className="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                <br className="d-block d-sm-none"/>
+              </div>
+              <div className="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-xs-12 vertical-center" style={{ backgroundColor: "#f0eaff" }}>
+                  <h6 style={{ color: "#000", fontSize: "80%", marginTop: "5px" }}>
+                  Your Staked SALE:
+                  <br/><span style={{color: "#1e30ed"}}>{this.props.yourSaleStaked} ({(this.props.yourSaleStaked*this.props.salePrice).toFixed(2)} USD)</span>
+                  </h6>
+              </div>
+            </div>
+            <br/>
+            <div className="row justify-content-center">
             <div className="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-xs-12 vertical-center" style={{ backgroundColor: "#f0eaff" }}>
                 <h6 style={{ color: "#000", fontSize: "80%", marginTop: "5px" }}>
                 Lifetime SALE Airdropped to Stakers:
