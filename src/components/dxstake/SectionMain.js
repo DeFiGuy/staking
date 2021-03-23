@@ -307,8 +307,6 @@ export default class SectionMain extends Component {
       const airdropRound = await this.state.airdropContract.methods.airdrop_round(SALE_TOKEN_ADDRESS).call();
       const registrationDataFetch = await this.state.airdropContract.methods.STAKE_total_for_token(SALE_TOKEN_ADDRESS, airdropRound).call();
       this.setState({registrationData: registrationDataFetch})
-      console.log("Registration deadline is " + registrationDataFetch['deadline']);
-      console.log("Date.now is " + Date.now())
     }
     else{
       console.log('Web3 connection issue');
