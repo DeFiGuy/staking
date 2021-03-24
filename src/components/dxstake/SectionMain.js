@@ -95,20 +95,11 @@ export default class SectionMain extends Component {
       newWeb3 = new Web3(window.ethereum);
       this.setState({ web3: newWeb3 });
       this.reloadData();
-      window.ethereum.on("accountsChanged", (accounts) => {
-        this.setState({ account: accounts });
-        this.setState({ approved: false });
-        this.reloadData();
-      })
     }
     // Legacy dapp browsers...
     else if (window.web3) {
       newWeb3 = new Web3(window.web3.currentProvider);
       this.setState({ web3: newWeb3 });
-      window.web3.currentProvider.on("accountsChanged", (accounts) => {
-        this.setState({ approved: false });
-        this.reloadData();
-      })
     }
     // Non-dapp browsers...
     else {
@@ -143,7 +134,19 @@ export default class SectionMain extends Component {
   async connectAndLoad(){
     if (this.state.web3 != null){
       const accounts = await this.state.web3.eth.getAccounts();
-      this.setState({ account: accounts });
+      try{
+        if (linkedAccount[0].substr(0, 2) == '0x'){
+          this.setState({ account: accounts });
+        }
+        else{
+          alert("Connection failed");
+        }
+      }
+      catch (err){
+        console.log("Fetching wallet address failed");
+        alert("Wallet connection failed, try a different browser")
+      }
+
       const stkContract = new this.state.web3.eth.Contract(DXSTAKEABI, STAKE_ADDRESS);
       this.setState({ stakeContract: stkContract });
       const tknContract = new this.state.web3.eth.Contract(SALETOKENABI, SALE_TOKEN_ADDRESS);
