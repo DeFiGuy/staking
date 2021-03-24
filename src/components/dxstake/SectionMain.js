@@ -135,7 +135,7 @@ export default class SectionMain extends Component {
     if (this.state.web3 != null){
       const accounts = await this.state.web3.eth.getAccounts();
       try{
-        if (linkedAccount[0].substr(0, 2) == '0x'){
+        if (accounts[0].substr(0, 2) == '0x'){
           this.setState({ account: accounts });
         }
         else{
