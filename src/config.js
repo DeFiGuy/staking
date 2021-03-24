@@ -1,6 +1,6 @@
 export const STAKE_ADDRESS = "0xEb3a9C56d963b971d320f889bE2fb8B59853e449";
 export const SALE_TOKEN_ADDRESS = "0xF063fE1aB7a291c5d06a86e14730b00BF24cB589";
-export const AIRDROP_ADDRESS = "0xE26B11d2E15b2F26818665244606EE70e0cE7CA7";
+export const AIRDROP_ADDRESS = "0xB921bD644aCc849298ee2604c1E4eD7E1238DdB9";
 
 export const DXSTAKEABI = 
 [
@@ -1257,17 +1257,6 @@ export const SALETOKENABI =
 
 export const AIRDROPABI = [
 	{
-		"inputs": [
-			{
-				"internalType": "contract IERC20",
-				"name": "_token",
-				"type": "address"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -1285,6 +1274,88 @@ export const AIRDROPABI = [
 		],
 		"name": "CLAIMEDAIRDROP",
 		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "claimTokenAdr",
+				"type": "address"
+			}
+		],
+		"name": "claimRegisteredAirdrop",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "tokenAdr",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_round",
+				"type": "uint256"
+			}
+		],
+		"name": "disable_token_drop",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "tokenAdr",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_round",
+				"type": "uint256"
+			}
+		],
+		"name": "enable_token_drop",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "tokenAdr",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_dropAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_earlyDropAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_eligibleEarlyTime",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_deadline",
+				"type": "uint256"
+			}
+		],
+		"name": "initiate_token_drop",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"anonymous": false,
@@ -1306,15 +1377,63 @@ export const AIRDROPABI = [
 		"type": "event"
 	},
 	{
-		"inputs": [],
-		"name": "CLAIMAIRDROP",
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "tokenAddr",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "wallet",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "refundAirdropTokens",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "Total_Airdrop_amount",
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "claimTokenAdr",
+				"type": "address"
+			}
+		],
+		"name": "RegisterForAirdrop",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_newStakeAddr",
+				"type": "address"
+			}
+		],
+		"name": "updateStakingAddress",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "airdrop_round",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1328,19 +1447,25 @@ export const AIRDROPABI = [
 	{
 		"inputs": [
 			{
-				"internalType": "address[]",
-				"name": "list",
-				"type": "address[]"
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
-		"name": "_EnableWhitelist",
-		"outputs": [],
-		"stateMutability": "nonpayable",
+		"name": "airdrop_token_record",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
 		"inputs": [],
-		"name": "_checkEligbleUsers",
+		"name": "checkBlockTimeStamp",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1353,12 +1478,37 @@ export const AIRDROPABI = [
 	},
 	{
 		"inputs": [],
-		"name": "_checkEligibility",
+		"name": "checkInitialStakedTime",
 		"outputs": [
 			{
 				"internalType": "bool",
 				"name": "",
 				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -1366,7 +1516,20 @@ export const AIRDROPABI = [
 	},
 	{
 		"inputs": [],
-		"name": "_checkSALEbalance",
+		"name": "checkStaked",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "checkTotalStaked",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1380,24 +1543,30 @@ export const AIRDROPABI = [
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
+				"internalType": "address",
+				"name": "claimTokenAdr",
+				"type": "address"
 			}
 		],
-		"name": "_fundRefund",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "airdrop_amount_inEther",
+		"name": "claimRegisteredAirdropViewer",
 		"outputs": [
 			{
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "dxStakeAddress",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
 			}
 		],
 		"stateMutability": "view",
@@ -1437,12 +1606,274 @@ export const AIRDROPABI = [
 				"type": "address"
 			}
 		],
-		"name": "whitelist",
+		"name": "Registration",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "RegistrationTime",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "Registered",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "userStaked",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "round",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "earlyStaker",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "totalSTAKED",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "reigsteredEarlyTokenInRound",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "reigsteredEarlyTokenTotal",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "reigsteredTokenInRound",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "reigsteredTokenTotal",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "STAKE_total_for_token",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "initiatedTime",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "deadline",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "eligibleTime",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "initiated",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "dropAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "earlyDropAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "totalSTAKED",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "totalSTAKEDCalc",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenAvailable",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "registrationEnabled",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "token_airdropped",
 		"outputs": [
 			{
 				"internalType": "bool",
 				"name": "",
 				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "token_number",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "totalTokensAirdroped",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "user_claimed",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "user_claimed_amount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
