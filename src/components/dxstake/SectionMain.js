@@ -4,28 +4,11 @@ import Tab1 from './Tab1'
 import Tab2 from './Tab2'
 import DxDrop from './DxDrop'
 import Web3 from 'web3';
-import Web3Modal from "web3modal";
-import WalletConnectProvider from "@walletconnect/web3-provider";
+import '@metamask/legacy-web3';
 import { STAKE_ADDRESS, SALE_TOKEN_ADDRESS, AIRDROP_ADDRESS, DXSTAKEABI, SALETOKENABI, AIRDROPABI } from '../../config'
 
 const CoinGecko = require('coingecko-api');
 const CoinGeckoClient = new CoinGecko();
-
-const providerOptions = {
-  walletconnect: {
-    package: WalletConnectProvider,
-    options: {
-      infuraId: "8043bb2cf99347b1bfadfb233c5325c0",
-    }
-  }
-}
-
-const web3Modal = new Web3Modal({
-  network: "mainnet", // optional
-  cacheProvider: true, // optional
-  providerOptions // required
-});
-
 
 export default class SectionMain extends Component {
 
