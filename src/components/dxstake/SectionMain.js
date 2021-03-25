@@ -4,28 +4,10 @@ import Tab1 from './Tab1'
 import Tab2 from './Tab2'
 import DxDrop from './DxDrop'
 import Web3 from 'web3';
-import Web3Modal from "web3modal";
-import WalletConnectProvider from "@walletconnect/web3-provider";
 import { STAKE_ADDRESS, SALE_TOKEN_ADDRESS, AIRDROP_ADDRESS, DXSTAKEABI, SALETOKENABI, AIRDROPABI } from '../../config'
 
 const CoinGecko = require('coingecko-api');
 const CoinGeckoClient = new CoinGecko();
-
-const providerOptions = {
-  walletconnect: {
-    package: WalletConnectProvider,
-    options: {
-      infuraId: "8043bb2cf99347b1bfadfb233c5325c0",
-    }
-  }
-}
-
-const web3Modal = new Web3Modal({
-  network: "mainnet", // optional
-  cacheProvider: true, // optional
-  providerOptions // required
-});
-
 
 export default class SectionMain extends Component {
 
@@ -97,18 +79,13 @@ export default class SectionMain extends Component {
       window.ethereum.enable();
       this.setState({ web3: newWeb3 });
       this.reloadData();
-      window.ethereum.on("accountsChanged", (accounts) => {
-        this.setState({ account: accounts });
-        this.setState({ approved: false });
-        this.reloadData();
-      })
     }
     // Legacy dapp browsers...
     else if (window.web3) {
       console.log("Window.web3 detected")
       newWeb3 = new Web3(window.web3.currentProvider);
-      this.setState({ web3: newWeb3 });
       window.web3.enable();
+      this.setState({ web3: newWeb3 });
       window.web3.currentProvider.on("accountsChanged", (accounts) => {
         this.setState({ approved: false });
         this.reloadData();
@@ -147,7 +124,19 @@ export default class SectionMain extends Component {
   async connectAndLoad(){
     if (this.state.web3 != null){
       const accounts = await this.state.web3.eth.getAccounts();
-      this.setState({ account: accounts });
+      try{
+        if (accounts[0].substr(0, 2) == '0x'){
+          this.setState({ account: accounts });
+        }
+        else{
+          alert("Connection failed");
+        }
+      }
+      catch (err){
+        console.log("Fetching wallet address failed");
+        alert("Wallet connection failed, try a different browser")
+      }
+
       const stkContract = new this.state.web3.eth.Contract(DXSTAKEABI, STAKE_ADDRESS);
       this.setState({ stakeContract: stkContract });
       const tknContract = new this.state.web3.eth.Contract(SALETOKENABI, SALE_TOKEN_ADDRESS);

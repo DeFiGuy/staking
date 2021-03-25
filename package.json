@@ -4,12 +4,12 @@
   "private": true,
   "homepage": "https://staking.dxsale.network",
   "dependencies": {
+    "@metamask/legacy-web3": "^2.0.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "@walletconnect/web3-provider": "^1.2.2",
     "coingecko-api": "^1.0.10",
-    "gh-pages": "^3.1.0",
     "light-toast": "^0.3.0",
     "react": "^16.13.1",
     "react-countdown": "^2.3.1",
@@ -42,5 +42,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^3.1.0"
   }
 }
