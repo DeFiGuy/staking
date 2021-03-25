@@ -4,7 +4,6 @@ import Tab1 from './Tab1'
 import Tab2 from './Tab2'
 import DxDrop from './DxDrop'
 import Web3 from 'web3';
-import '@metamask/legacy-web3';
 import { STAKE_ADDRESS, SALE_TOKEN_ADDRESS, AIRDROP_ADDRESS, DXSTAKEABI, SALETOKENABI, AIRDROPABI } from '../../config'
 
 const CoinGecko = require('coingecko-api');
@@ -76,12 +75,14 @@ export default class SectionMain extends Component {
     var newWeb3 = null;
     if (window.ethereum){
       newWeb3 = new Web3(window.ethereum);
+      window.ethereum.enable();
       this.setState({ web3: newWeb3 });
       this.reloadData();
     }
     // Legacy dapp browsers...
     else if (window.web3) {
       newWeb3 = new Web3(window.web3.currentProvider);
+      window.web3.enable();
       this.setState({ web3: newWeb3 });
     }
     // Non-dapp browsers...
