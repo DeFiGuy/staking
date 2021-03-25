@@ -74,17 +74,21 @@ export default class SectionMain extends Component {
   async connectWeb3(){
     var newWeb3 = null;
     if (window.ethereum){
-      console.log("Window.ethereum detected")
+      console.log("Im inside window.ethereum")
       newWeb3 = new Web3(window.ethereum);
       window.ethereum.enable();
       this.setState({ web3: newWeb3 });
       this.reloadData();
+      window.ethereum.on("accountsChanged", (accounts) => {
+        this.setState({ account: accounts });
+        this.setState({ approved: false });
+        this.reloadData();
+      })
     }
     // Legacy dapp browsers...
     else if (window.web3) {
-      console.log("Window.web3 detected")
+      console.log("Im inside window.web3")
       newWeb3 = new Web3(window.web3.currentProvider);
-      window.web3.enable();
       this.setState({ web3: newWeb3 });
       window.web3.currentProvider.on("accountsChanged", (accounts) => {
         this.setState({ approved: false });
