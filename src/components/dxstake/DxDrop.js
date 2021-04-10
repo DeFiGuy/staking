@@ -41,7 +41,7 @@ export default class DxDrop extends Component {
                 {Date.now() < this.props.registrationData['deadline']*1000
                 ?
                   <div>
-                    <span>0 (0 USD)</span>
+                    <span style={{color: "#1e30ed"}}>Registration in progress!</span> <img src="https://i.gifer.com/xt.gif" height="20px" width="20px" alt="calculating"></img>
                   </div>
                 :
                   <div>
@@ -143,6 +143,7 @@ export default class DxDrop extends Component {
             - If you have staked more SALE you must register to be eligible for airdrops on the additional SALE staked.<br/>
             - If you have unstaked SALE but still have some tokens staked you must register to remain eligible for airdrops.<br/>
             - If you missed this registration round, not to worry you will have a chance to register again before the next airdrop goes live!<br/>
+            - For any unclaimed airdrops they will accumulate for the next session
         </span>
         </div>
       </div>
