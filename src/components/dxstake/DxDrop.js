@@ -62,13 +62,16 @@ export default class DxDrop extends Component {
                         {this.props.userRegistered 
                         ?
                         <div>
-                          {Math.floor(this.props.registeredStakedAmount / 10**18) != Math.floor(this.props.yourSaleStakedx / 10**18)
+                          {(this.props.registeredStakedAmount / 10**18) != (this.props.yourSaleStakedx / 10**18)
                           ?
                           <div>
-                            <span style={{ color: '#8A61F8', fontSize: '80%' }}>You registered earlier but your staked amount doesn't match your registered amount.<br/>Please click the button below to re-regsiter!</span>
-                            <br/>
+                            <span style={{ color: '#8A61F8', fontSize: '80%' }}>
+                              Your Registered Amount: {(this.props.yourSaleStakedx / 10**18).toFixed(2)}<br/>
+                              Seems like your staked amount doesn't match your registered amount!<br/>If your staked amount is less than your registered amount you need to re-register.<br/>If your staked amount is higher than your registered amount then you will only be eligible for the registered amount.
+                            </span>
+                            <br/><br/>
                             <button disabled={false} className="btn btn-secondary" type="button" onClick={this.props.registerForAirdrop} style={{fontSize: '80%', width:"150px"}}>
-                              Register
+                              Re-Register
                             </button>
                             <br/><br/>
                             Registration ends in:
