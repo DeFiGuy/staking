@@ -62,8 +62,19 @@ export default class DxDrop extends Component {
                         {this.props.userRegistered 
                         ?
                         <div>
-                          {(this.props.registeredStakedAmount / 10**18) != (this.props.yourSaleStakedx / 10**18)
+                          {(Math.floor(this.props.registeredStakedAmount / 10**18) == Math.floor(this.props.yourSaleStakedx / 10**18)) 
+                          || (Math.ceil(this.props.registeredStakedAmount / 10**18) == Math.ceil(this.props.yourSaleStakedx / 10**18))
+                          || (Math.round(this.props.registeredStakedAmount / 10**18) == Math.round(this.props.yourSaleStakedx / 10**18))
                           ?
+                          <div>
+                            <span style={{ color: '#8A61F8', fontSize: '80%' }}>You are already registered!<br/>Claiming your airdrop will be available once the registration deadline is finished!</span>
+                            <br/><br/>
+                            Registration ends in:
+                            <br/>
+                            <Countdown date={this.props.registrationData['deadline']*1000} />
+                            <br/>
+                          </div>
+                          :
                           <div>
                             <span style={{ color: '#8A61F8', fontSize: '80%' }}>
                               Your Registered Amount: {(this.props.yourSaleStakedx / 10**18).toFixed(2)}<br/>
@@ -73,15 +84,6 @@ export default class DxDrop extends Component {
                             <button disabled={false} className="btn btn-secondary" type="button" onClick={this.props.registerForAirdrop} style={{fontSize: '80%', width:"150px"}}>
                               Re-Register
                             </button>
-                            <br/><br/>
-                            Registration ends in:
-                            <br/>
-                            <Countdown date={this.props.registrationData['deadline']*1000} />
-                            <br/>
-                          </div>
-                          :
-                          <div>
-                            <span style={{ color: '#8A61F8', fontSize: '80%' }}>You are already registered!<br/>Claiming your airdrop will be available once the registration deadline is finished!</span>
                             <br/><br/>
                             Registration ends in:
                             <br/>
