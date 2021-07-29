@@ -18,6 +18,13 @@ export default class Tab1 extends Component {
           </div>
           : 
           <div id="showStaking">
+            <br/>
+            <span style={{color: 'red'}}><strong>Staking has been discontinued! We have moved to a buyback and burn model!</strong></span>
+            <br/>
+            <span style={{color: 'black', fontSize: '80%'}}>Do not stake any tokens! Only users suggested to stake should stake to claim their old airdrop.</span>
+            <br/>
+            <span style={{color: 'black', fontSize: '80%'}}>For help or information please reach out to our telegram group <a href="https://t.me/dxsale">here</a></span>
+            <br/><br/>
             <form className="input-round">
                 <div style={{ fontSize: '80%' }}>2% Staking Fee</div>
                 <div className="form-group input-group">
@@ -28,7 +35,7 @@ export default class Tab1 extends Component {
                       </button>
                   </div>
                 </div>
-                <div style={{ fontSize: '80%' }}>8% Unstaking Fee</div>
+                <div style={{ fontSize: '80%' }}>1% Unstaking Fee</div>
                 <div className="form-group input-group">
                   <input type="number" className="form-control" placeholder="SALE AMOUNT" value={this.props.unstakeAmount} onChange={this.props.handleUnStakeUpdate}></input>
                   <div className="input-group-prepend">
@@ -41,7 +48,7 @@ export default class Tab1 extends Component {
 
                 <div className="row">
                   <div className="col-lg-4 col-md-12 col-sm-12">
-                  <button className="btn btn-primary" type="button" onClick={this.props.reinvestRewards} style={{fontSize: '55%', width:"170px"}}>
+                  <button disabled className="btn btn-primary" type="button" onClick={this.props.reinvestRewards} style={{fontSize: '55%', width:"170px"}}>
                   Reinvest
                   </button>
                   </div>
